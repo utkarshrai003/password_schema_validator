@@ -12,6 +12,14 @@ module SchemaHelperMethods
     dictionary: :boolean
   }
 
+  def match_against_schema(record, attr_name, string)
+    @attributes.each do |attribute|
+      key, value = attribute
+      error_msg = send(key, value, string)
+      record.errors.add(attr_name, error_msg, options) if validation_error
+    end
+  end
+
   def validate_schema
     @attributes.each do |attribute|
       validate_attribute(attribute)
