@@ -5,7 +5,7 @@ module SchemaHelperMethods
     max_len: :integer,
     lower_case: :boolean,
     upper_case: :boolean,
-    digits: :integer,
+    digits: :boolean,
     special_charecters: :boolean,
     allowed_special_chareters: :array,
     discard_words: :array,
@@ -73,7 +73,7 @@ module SchemaHelperMethods
   end
 
   def invalid_value_type(key, expected_type)
-    "'" + key.to_s + "' must be of type " + expected_type[0].to_s
+    "'" + key.to_s + "' must be of type " + expected_type.to_s
   end
 
   def integer
