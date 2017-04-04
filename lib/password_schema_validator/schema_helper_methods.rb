@@ -28,6 +28,14 @@ module SchemaHelperMethods
     return "must be maximum " + maxValue.to_s + " charecter long." if string.length > maxValue.to_i
   end
 
+  def lower_case(validate, string)
+    return "must contain lower-case letters." if validate && !(/[a-z]+/ =~ string)
+  end
+
+  def upper_case(validate, string)
+    return "must contain upper-case letters." if validate && !(/[A-Z]+/ =~ string)
+  end
+
   def validate_schema
     @attributes.each do |attribute|
       validate_attribute(attribute)
