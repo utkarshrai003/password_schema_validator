@@ -44,6 +44,15 @@ module SchemaHelperMethods
     return "must contain special charecters" if validate && !(/[`~\!@#\$%\^\&\*\(\)\-_\=\+\[\{\}\]\\\|;:'",<.>\/\?]+/ =~ string)
   end
 
+  def allowed_special_chareters
+  end
+
+  def discard_words
+  end
+
+  def dictionary
+  end
+
   def validate_schema
     @attributes.each do |attribute|
       validate_attribute(attribute)
