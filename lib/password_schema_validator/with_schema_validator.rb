@@ -6,8 +6,10 @@ module ActiveModel
       include SchemaHelperMethods
 
       def initialize(options)
-        @attributes = filter_options(options)
-        validate_schema
+        filtered_options = filter_options(options)
+        validate_schema(filtered_options)
+
+        super
       end
 
       def validate_each(record, attr_name, value)
