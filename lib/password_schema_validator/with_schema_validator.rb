@@ -14,7 +14,7 @@ module ActiveModel
         match_against_schema(record, attr_name, value)
       end
 
-      def filter_options
+      def filter_options(options)
         options.except(:attributes, :class)
       end
 
