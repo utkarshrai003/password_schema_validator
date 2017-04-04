@@ -13,10 +13,10 @@ module SchemaHelperMethods
   }
 
   def match_against_schema(record, attr_name, string)
-    @attributes.each do |attribute|
+    options.each do |attribute|
       key, value = attribute
       error_msg = send(key, value, string)
-      record.errors.add(attr_name, error_msg, options) if validation_error
+      record.errors.add(attr_name, error_msg, options) if error_msg
     end
   end
 
@@ -53,8 +53,8 @@ module SchemaHelperMethods
   def dictionary
   end
 
-  def validate_schema
-    @attributes.each do |attribute|
+  def validate_schema(options)
+    options.each do |attribute|
       validate_attribute(attribute)
     end
   end
