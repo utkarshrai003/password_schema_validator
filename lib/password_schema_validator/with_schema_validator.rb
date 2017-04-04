@@ -10,6 +10,10 @@ module ActiveModel
         validate_schema
       end
 
+      def validate_each(record, attr_name, value)
+        match_against_schema(record, attr_name, value)
+      end
+
       def filter_options
         options.except(:attributes, :class)
       end
