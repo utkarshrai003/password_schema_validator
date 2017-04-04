@@ -1,4 +1,7 @@
+require_relative 'class_specifier'
+
 module SchemaHelperMethods
+  include ClassSpecifier
 
   RESERVED_OPTIONS = {
     min_len: :integer,
@@ -74,18 +77,6 @@ module SchemaHelperMethods
 
   def invalid_value_type(key, expected_type)
     "'" + key.to_s + "' must be of type " + expected_type.to_s
-  end
-
-  def integer
-    [Fixnum]
-  end
-
-  def boolean
-    [true.class, false.class]
-  end
-
-  def array
-    [Array]
   end
 
 end
