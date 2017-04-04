@@ -36,6 +36,10 @@ module SchemaHelperMethods
     return "must contain upper-case letters." if validate && !(/[A-Z]+/ =~ string)
   end
 
+  def digits(validate, string)
+    return "must contain digits." if validate && !(/\d+/ =~ string)
+  end
+
   def validate_schema
     @attributes.each do |attribute|
       validate_attribute(attribute)
