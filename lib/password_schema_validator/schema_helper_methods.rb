@@ -20,6 +20,14 @@ module SchemaHelperMethods
     end
   end
 
+  def min_len(minValue, string)
+    return "must be minimum " + minValue.to_s + " charecter long." if string.length < minValue.to_i
+  end
+
+  def max_len(maxValue, string)
+    return "must be maximum " + maxValue.to_s + " charecter long." if string.length > maxValue.to_i
+  end
+
   def validate_schema
     @attributes.each do |attribute|
       validate_attribute(attribute)
