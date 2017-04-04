@@ -40,6 +40,10 @@ module SchemaHelperMethods
     return "must contain digits." if validate && !(/\d+/ =~ string)
   end
 
+  def special_charecters(validate, string)
+    return "must contain special charecters" if validate && !(/[`~\!@#\$%\^\&\*\(\)\-_\=\+\[\{\}\]\\\|;:'",<.>\/\?]+/ =~ string)
+  end
+
   def validate_schema
     @attributes.each do |attribute|
       validate_attribute(attribute)
