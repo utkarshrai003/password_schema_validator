@@ -69,7 +69,7 @@ module SchemaHelperMethods
   end
 
   def invalid_key_error(key)
-    "Invalid key - '"key.to_s + "' passed to the schema. Provide a valid permitted key."
+    "Invalid key - '" + key.to_s + "' passed to the schema. Provide a valid permitted key."
   end
 
   def invalid_value_type(key, expected_type)
