@@ -83,6 +83,46 @@ describe 'Password Schema Validator' do
       end
     end
 
+    context "When 'digits' attribute is specified" do
+      before do
+        class User
+          validates :password, with_schema: {
+            digits: true
+          }
+        end
+      end
+
+      it "should return false when password does not contain any digits" do
+        user = User.new(password: "$password")
+        expect(user.valid?).to eq(false)
+      end
+
+      it "should return true when password contain at least one digit" do
+        user = User.new(password: "$Pass123")
+        expect(user.valid?).to eq(true)
+      end
+    end
+
+    context "When 'special_charecters' attribute is specified" do
+      before do
+        class User
+          validates :password, with_schema: {
+            special_charecters: true
+          }
+        end
+      end
+
+      it "should return false when password does not contain any special_charecters" do
+        user = User.new(password: "password123")
+        expect(user.valid?).to eq(false)
+      end
+
+      it "should return true when password contain at least one special_charecter" do
+        user = User.new(password: "$Pass123")
+        expect(user.valid?).to eq(true)
+      end
+    end
+
   end
 end
 
