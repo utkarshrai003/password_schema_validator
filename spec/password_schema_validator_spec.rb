@@ -21,7 +21,6 @@ describe 'Password Schema Validator' do
         user = User.new(password: "password")
         expect(user.valid?).to eq(true)
       end
-
     end
 
     context "When 'max_len' attribute is specified" do
@@ -40,6 +39,46 @@ describe 'Password Schema Validator' do
 
       it "should return true when password length is less than or equal to 'max_len' specified" do
         user = User.new(password: "password")
+        expect(user.valid?).to eq(true)
+      end
+    end
+
+    context "When 'lower_case' attribute is specified" do
+      before do
+        class User
+          validates :password, with_schema: {
+            lower_case: true
+          }
+        end
+      end
+
+      it "should return false when password does not contain any lower-case letter" do
+        user = User.new(password: "$PASS123")
+        expect(user.valid?).to eq(false)
+      end
+
+      it "should return true when password contain at least one lower-case letter" do
+        user = User.new(password: "$Pass123")
+        expect(user.valid?).to eq(true)
+      end
+    end
+
+    context "When 'upper_case' attribute is specified" do
+      before do
+        class User
+          validates :password, with_schema: {
+            upper_case: true
+          }
+        end
+      end
+
+      it "should return false when password does not contain any upper-case letter" do
+        user = User.new(password: "$pass123")
+        expect(user.valid?).to eq(false)
+      end
+
+      it "should return true when password contain at least one upper-case letter" do
+        user = User.new(password: "$Pass123")
         expect(user.valid?).to eq(true)
       end
     end
