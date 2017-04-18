@@ -24,23 +24,23 @@ module SchemaHelperMethods
   end
 
   def min_len(minValue, string)
-    return "must be minimum " + minValue.to_s + " charecter long." if string.length < minValue.to_i
+    return "must be minimum " + minValue.to_s + " charecter long" if string.length < minValue.to_i
   end
 
   def max_len(maxValue, string)
-    return "must be maximum " + maxValue.to_s + " charecter long." if string.length > maxValue.to_i
+    return "must be maximum " + maxValue.to_s + " charecter long" if string.length > maxValue.to_i
   end
 
   def lower_case(validate, string)
-    return "must contain lower-case letters." if validate && !(/[a-z]+/ =~ string)
+    return "must contain lower-case letters" if validate && !(/[a-z]+/ =~ string)
   end
 
   def upper_case(validate, string)
-    return "must contain upper-case letters." if validate && !(/[A-Z]+/ =~ string)
+    return "must contain upper-case letters" if validate && !(/[A-Z]+/ =~ string)
   end
 
   def digits(validate, string)
-    return "must contain digits." if validate && !(/\d+/ =~ string)
+    return "must contain digits" if validate && !(/\d+/ =~ string)
   end
 
   def special_charecters(validate, string)
