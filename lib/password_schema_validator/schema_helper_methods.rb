@@ -50,7 +50,8 @@ module SchemaHelperMethods
   def allowed_special_chareters
   end
 
-  def discard_words
+  def discard_words(black_listed_words, string)
+    return "must not be in the black listed words" if black_listed_words.map(&:downcase).include?(string.downcase)
   end
 
   def dictionary
