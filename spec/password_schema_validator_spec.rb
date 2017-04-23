@@ -3,6 +3,7 @@ require 'pry'
 
 describe 'Password Schema Validator' do
   describe 'When a Password field is validated using Password Schema Validator' do
+
     context "# min_len attribute" do
       context "When 'min_len' attribute is specified" do
         before do
@@ -34,6 +35,7 @@ describe 'Password Schema Validator' do
       context "When 'min_len' attribute is supplied with wrong datatype value" do
         it "should raise Error stating - 'min_len' must be an integer" do
           expect {
+            User.clear_validators!
             class User
               validates :password, with_schema: {
                 min_len: "five"
@@ -48,6 +50,7 @@ describe 'Password Schema Validator' do
     context "# max_len attribute" do
       context "When 'max_len' attribute is specified" do
         before do
+          User.clear_validators!
           class User
             validates :password, with_schema: {
               max_len: 8
@@ -115,6 +118,7 @@ describe 'Password Schema Validator' do
       context "When 'lower_case' attribute is supplied with wrong datatype value" do
         it "should raise Error stating - 'lower_case' must be of type boolean" do
           expect {
+            User.clear_validators!
             class User
               validates :password, with_schema: {
                 lower_case: "lower"
@@ -128,6 +132,7 @@ describe 'Password Schema Validator' do
     context "# upper_case attribute" do
       context "When 'upper_case' attribute is specified" do
         before do
+        User.clear_validators!
           class User
             validates :password, with_schema: {
               upper_case: true
@@ -155,6 +160,7 @@ describe 'Password Schema Validator' do
       context "When 'upper_case' attribute is supplied with wrong datatype value" do
         it "should raise Error stating - 'upper_case' must be of type boolean" do
           expect {
+            User.clear_validators!
             class User
               validates :password, with_schema: {
                 upper_case: "upper"
@@ -168,6 +174,7 @@ describe 'Password Schema Validator' do
     context "# digits attribute" do
       context "When 'digits' attribute is specified" do
         before do
+        User.clear_validators!
           class User
             validates :password, with_schema: {
               digits: true
@@ -195,6 +202,7 @@ describe 'Password Schema Validator' do
       context "When 'digits' attribute is supplied with wrong datatype value" do
         it "should raise Error stating - 'digits' must be of type boolean" do
           expect {
+            User.clear_validators!
             class User
               validates :password, with_schema: {
                 digits: 2
@@ -209,6 +217,7 @@ describe 'Password Schema Validator' do
     context "# special_charecters attribute" do
       context "When 'special_charecters' attribute is specified" do
         before do
+        User.clear_validators!
           class User
             validates :password, with_schema: {
               special_charecters: true
@@ -236,6 +245,7 @@ describe 'Password Schema Validator' do
       context "When 'special_charecters' attribute is supplied with wrong datatype value" do
         it "should raise Error stating - 'special_charecters' must be of type boolean" do
           expect {
+            User.clear_validators!
             class User
               validates :password, with_schema: {
                 special_charecters: 2
@@ -246,12 +256,13 @@ describe 'Password Schema Validator' do
       end
     end
 
-    context "# discard_words attribute" do
-      context "When 'discard_words' attribute is specified" do
+    context "# discarded_words attribute" do
+      context "When 'discarded_words' attribute is specified" do
         before do
+        User.clear_validators!
           class User
             validates :password, with_schema: {
-              discard_words: ["password", "$pass123", "password123"]
+              discarded_words: ["password", "$pass123", "password123"]
             }
           end
         end
@@ -264,7 +275,7 @@ describe 'Password Schema Validator' do
         it "should push appropriate error message for the failed Validation"  do
           user = User.new(password: "password123")
           user.valid?
-          expect(user.errors[:password]).to include("must not be in the black listed words")
+          expect(user.errors[:password]).to include("must not be in the discarded words")
         end
 
         it "should return true when password is not in discarded words" do
@@ -276,9 +287,10 @@ describe 'Password Schema Validator' do
       context "When 'discarded_words' attribute is supplied with wrong datatype value" do
         it "should raise Error stating - 'discarded_words' must be of type array" do
           expect {
+            User.clear_validators!
             class User
               validates :password, with_schema: {
-                discard_words: "password, pass123"
+                discarded_words: "password, pass123"
               }
             end
           }.to raise_error("'discarded_words' must be of type array")
