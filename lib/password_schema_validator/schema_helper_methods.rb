@@ -11,7 +11,7 @@ module SchemaHelperMethods
     digits: :boolean,
     special_charecters: :boolean,
     allowed_special_chareters: :array,
-    discard_words: :array,
+    discarded_words: :array,
     dictionary: :boolean
   }
 
@@ -50,8 +50,8 @@ module SchemaHelperMethods
   def allowed_special_chareters
   end
 
-  def discard_words(black_listed_words, string)
-    return "must not be in the black listed words" if black_listed_words.map(&:downcase).include?(string.downcase)
+  def discarded_words(black_listed_words, string)
+    return "must not be in the discarded words" if black_listed_words.map(&:downcase).include?(string.downcase)
   end
 
   def dictionary
