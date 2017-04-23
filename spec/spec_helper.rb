@@ -1,5 +1,6 @@
 require 'support/user'
 require 'support/schema'
+require 'rspec'
 
 begin
   ActiveRecord::Base.establish_connection(
@@ -16,9 +17,6 @@ unless connection.table_exists? 'users'
   UserCreate.migrate(:change)
 end
 
-# require 'password_schema_validator' # and any other gems you need
-
 RSpec.configure do |config|
-  # some (optional) config here
-  # config.use_transactional_fixtures = true
+  config.add_setting :use_transactional_fixtures, default: true
 end
