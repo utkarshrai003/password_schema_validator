@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pry'
 
 describe 'Password Schema Validator' do
   describe 'When a Password field is validated using Password Schema Validator' do
