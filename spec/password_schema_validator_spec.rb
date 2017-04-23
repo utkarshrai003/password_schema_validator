@@ -2,11 +2,11 @@ require 'spec_helper'
 require 'pry'
 
 describe 'Password Schema Validator' do
-  context 'When a Password field is validated using Password Schema Validator' do
-
+  describe 'When a Password field is validated using Password Schema Validator' do
     context "# min_len attribute" do
       context "When 'min_len' attribute is specified" do
         before do
+          User.clear_validators!
           class User
             validates :password, with_schema: {
               min_len: 5
@@ -246,7 +246,45 @@ describe 'Password Schema Validator' do
       end
     end
 
+    context "# discard_words attribute" do
+      context "When 'discard_words' attribute is specified" do
+        before do
+          class User
+            validates :password, with_schema: {
+              discard_words: ["password", "$pass123", "password123"]
+            }
+          end
+        end
+
+        it "should return false when the password is one of the discared words" do
+          user = User.new(password: "password123")
+          expect(user.valid?).to eq(false)
+        end
+
+        it "should push appropriate error message for the failed Validation"  do
+          user = User.new(password: "password123")
+          user.valid?
+          expect(user.errors[:password]).to include("must not be in the black listed words")
+        end
+
+        it "should return true when password is not in discarded words" do
+          user = User.new(password: "$randomPass")
+          expect(user.valid?).to eq(true)
+        end
+      end
+
+      context "When 'discarded_words' attribute is supplied with wrong datatype value" do
+        it "should raise Error stating - 'discarded_words' must be of type array" do
+          expect {
+            class User
+              validates :password, with_schema: {
+                discard_words: "password, pass123"
+              }
+            end
+          }.to raise_error("'discarded_words' must be of type array")
+        end
+      end
+    end
+
   end
 end
-
-# gem 'password_schema_validator', '0.0.0.1', :path => './password_schema_validator-0.0.0.1'
