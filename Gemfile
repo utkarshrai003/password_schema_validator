@@ -9,6 +9,6 @@ gemspec
 
 group :development, :test do
   gem "activerecord", "~> 4.0.0"
-  gem "rspec", "~> 2.3"
+  gem "rspec", "~> 3.5.0"
   gem "pry"
 end
