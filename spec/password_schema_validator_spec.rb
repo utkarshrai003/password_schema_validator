@@ -212,6 +212,47 @@ describe 'Password Schema Validator' do
       end
     end
 
+    context "# letters attribute" do
+      context "When 'letters' attribute is specified" do
+        before do
+        User.clear_validators!
+          class User
+            validates :password, with_schema: {
+              letters: true
+            }
+          end
+        end
+
+        it "should return false when password does not contain any letters" do
+          user = User.new(password: "$122_#")
+          expect(user.valid?).to eq(false)
+        end
+
+        it "should push appropriate error message for the failed Validation"  do
+          user = User.new(password: "$122_#")
+          user.valid?
+          expect(user.errors[:password]).to include("must contain letters")
+        end
+
+        it "should return true when password contain at least one letter" do
+          user = User.new(password: "$Pass123")
+          expect(user.valid?).to eq(true)
+        end
+      end
+
+      context "When 'letters' attribute is supplied with wrong datatype value" do
+        it "should raise Error stating - 'letters' must be of type boolean" do
+          expect {
+            User.clear_validators!
+            class User
+              validates :password, with_schema: {
+                letters: 2
+              }
+            end
+          }.to raise_error("'letters' must be of type boolean")
+        end
+      end
+    end
 
     context "# special_charecters attribute" do
       context "When 'special_charecters' attribute is specified" do
