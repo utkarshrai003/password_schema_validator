@@ -1,3 +1,5 @@
+[![CircleCI](https://circleci.com/gh/utkarshrai003/password_schema_validator/tree/master.svg?style=svg)](https://circleci.com/gh/utkarshrai003/password_schema_validator/tree/master)
+
 # password_schema_validator
 
 Password Schema Validator is an extension for Active Model Validations that provides an easy way to validate a password or a string against a user defined schema. This gem is a motivation from the npm module - https://github.com/tarunbatra/password-validator
