@@ -8,6 +8,7 @@ module SchemaHelperMethods
     max_len: :integer,
     lower_case: :boolean,
     upper_case: :boolean,
+    letters: :boolean,
     digits: :boolean,
     special_charecters: :boolean,
     allowed_special_chareters: :array,
@@ -37,6 +38,10 @@ module SchemaHelperMethods
 
   def upper_case(validate, string)
     return "must contain upper-case letters" if validate && !(/[A-Z]+/ =~ string)
+  end
+
+  def letters(validate, string)
+    return "must contain letters" if validate && !(/[a-zA-Z]+/ =~ string)
   end
 
   def digits(validate, string)
