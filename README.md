@@ -40,4 +40,20 @@ Option key | Value datatype | Description
 **special_charater** | `boolean` | validates if the password has at least one special character.
 **discarded_words** | `array` | validates if the password if not one among the discarded word list.
 
+## ToDo
+
+* Add option to support a dictionary of weak passwords to prevent user from choosing some weak passwords like "password" or "password123".
+* Add option to support explicitely specify allowed special characters in the options.
+* Documentation via Rdoc.
+
+## Contributing
+
+Pull Requests and Bug Fixes are most welcome. 
+
+* Fork the Project.
+* Run bundle.
+* Make your feature branch or Bug-Fix.
+* Add tests for it. This is important so that it doesn't break future versions unintentionally.
+* Commit the changes without messing with the history or version.
+* Create Pull request.
 
