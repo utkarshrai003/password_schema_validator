@@ -254,18 +254,18 @@ describe 'Password Schema Validator' do
       end
     end
 
-    context "# special_charecters attribute" do
-      context "When 'special_charecters' attribute is specified" do
+    context "# special_characters attribute" do
+      context "When 'special_characters' attribute is specified" do
         before do
         User.clear_validators!
           class User
             validates :password, with_schema: {
-              special_charecters: true
+              special_characters: true
             }
           end
         end
 
-        it "should return false when password does not contain any special_charecters" do
+        it "should return false when password does not contain any special_characters" do
           user = User.new(password: "password123")
           expect(user.valid?).to eq(false)
         end
@@ -273,7 +273,7 @@ describe 'Password Schema Validator' do
         it "should push appropriate error message for the failed Validation"  do
           user = User.new(password: "password123")
           user.valid?
-          expect(user.errors[:password]).to include("must contain special charecters")
+          expect(user.errors[:password]).to include("must contain special characters")
         end
 
         it "should return true when password contain at least one special_charecter" do
@@ -282,16 +282,16 @@ describe 'Password Schema Validator' do
         end
       end
 
-      context "When 'special_charecters' attribute is supplied with wrong datatype value" do
-        it "should raise Error stating - 'special_charecters' must be of type boolean" do
+      context "When 'special_characters' attribute is supplied with wrong datatype value" do
+        it "should raise Error stating - 'special_characters' must be of type boolean" do
           expect {
             User.clear_validators!
             class User
               validates :password, with_schema: {
-                special_charecters: 2
+                special_characters: 2
               }
             end
-          }.to raise_error("'special_charecters' must be of type boolean")
+          }.to raise_error("'special_characters' must be of type boolean")
         end
       end
     end

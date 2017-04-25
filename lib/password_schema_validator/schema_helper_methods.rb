@@ -10,7 +10,7 @@ module SchemaHelperMethods
     upper_case: :boolean,
     letters: :boolean,
     digits: :boolean,
-    special_charecters: :boolean,
+    special_characters: :boolean,
     allowed_special_chareters: :array,
     discarded_words: :array,
     dictionary: :boolean
@@ -48,8 +48,8 @@ module SchemaHelperMethods
     return "must contain digits" if validate && !(/\d+/ =~ string)
   end
 
-  def special_charecters(validate, string)
-    return "must contain special charecters" if validate && !(/[`~\!@#\$%\^\&\*\(\)\-_\=\+\[\{\}\]\\\|;:'",<.>\/\?]+/ =~ string)
+  def special_characters(validate, string)
+    return "must contain special characters" if validate && !(/[`~\!@#\$%\^\&\*\(\)\-_\=\+\[\{\}\]\\\|;:'",<.>\/\?]+/ =~ string)
   end
 
   def allowed_special_chareters
