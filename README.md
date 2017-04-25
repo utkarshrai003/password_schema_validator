@@ -38,6 +38,7 @@ Option key | Value datatype | Description
 **max_len** | `integer` | validates if the password has not more than "max_len" characters.
 **lower_case** | `boolean` | validates if the password has at least one lower case character.
 **upper_case** | `boolean` | validates if the password has at least one upper case character.
+**letters**  | `boolean` | validates if the password has at least one letter [a-z, A-Z].
 **digits** | `boolean` | validates if the password has at least one numerical character.
 **special_charater** | `boolean` | validates if the password has at least one special character.
 **discarded_words** | `array` | validates if the password if not one among the discarded word list.
