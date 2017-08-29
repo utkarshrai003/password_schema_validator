@@ -10,11 +10,13 @@ module SchemaHelperMethods
     upper_case: :boolean,
     letters: :boolean,
     digits: :boolean,
-    special_characters: :boolean,
+    special_characters: :boolean_or_array,
     allowed_special_chareters: :array,
     discarded_words: :array,
     dictionary: :boolean
   }
+
+  SPECIAL_CHARACTERS = " !\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"
 
   def match_against_schema(record, attr_name, string)
     options.each do |attribute|
@@ -48,8 +50,10 @@ module SchemaHelperMethods
     return "must contain digits" if validate && !(/\d+/ =~ string)
   end
 
-  def special_characters(validate, string)
-    return "must contain special characters" if validate && !(/[`~\!@#\$%\^\&\*\(\)\-_\=\+\[\{\}\]\\\|;:'",<.>\/\?]+/ =~ string)
+  def special_characters(option, string)
+    binding.pry
+    regex = get_regex(option)
+    return "must contain special characters" if option && !(regex =~ string)
   end
 
   def allowed_special_chareters
@@ -82,7 +86,19 @@ module SchemaHelperMethods
   end
 
   def invalid_value_type(key, expected_type)
-    "'" + key.to_s + "' must be of type " + expected_type.to_s
+    "'" + key.to_s + "' must be of type " + expected_type.to_s.split("_").join(" ")
+  end
+
+  def get_regex(option)
+    if option.class.eql?(Array) and has_valid_symbols?(option)
+      /[#{option.gsub(/./){|char| "\\#{char}"}}]/
+    else
+      /[#{SPECIAL_CHARACTERS.gsub(/./){|char| "\\#{char}"}}]/
+    end
+  end
+
+  def has_valid_symbols?(symbols)
+    (symbols - SPECIAL_CHARACTERS.split("")).blank?
   end
 
 end

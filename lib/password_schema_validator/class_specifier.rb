@@ -12,4 +12,8 @@ module ClassSpecifier
     [Array]
   end
 
+  def boolean_or_array
+    [boolean, array].flatten
+  end
+
 end

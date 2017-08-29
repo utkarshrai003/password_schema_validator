@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pry'
 
 describe 'Password Schema Validator' do
   describe 'When a Password field is validated using Password Schema Validator' do
@@ -266,6 +267,7 @@ describe 'Password Schema Validator' do
         end
 
         it "should return false when password does not contain any special_characters" do
+          binding.pry
           user = User.new(password: "password123")
           expect(user.valid?).to eq(false)
         end
